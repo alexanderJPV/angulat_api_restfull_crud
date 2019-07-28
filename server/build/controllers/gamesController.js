@@ -52,20 +52,33 @@ class GamesController {
         });
     }
     update(req, res) {
-        res.json({
-            text: 'updating a game' + req.params.id
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            var gamequery = "UPDATE games SET title=?,description=?,image=?";
+            var records = [req.body.title, req.body.description, req.body.image, id];
+            yield database_1.default.query(gamequery, records, (error, rows) => {
+                if (error) {
+                    res.status(500).json({ msg: 'error', details: error });
+                    throw error;
+                }
+                else {
+                    res.status(200).json({ text: 'The game was update' });
+                }
+            });
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params.id;
+            const { id } = req.params;
             const gamequery = 'DELETE FROM games WHERE id = ' + id;
             yield database_1.default.query(gamequery, (error, rows) => {
-                // if (Object.keys(rows).length < 1) {
-                //     res.status(404).json({text: 'The game does not existe'});
-                // } else {
-                res.status(200).json({ text: 'The game was eliminate' });
-                // }
+                if (error) {
+                    res.status(500).json({ msg: 'error', details: error });
+                    throw error;
+                }
+                else {
+                    res.status(200).json({ text: 'The game was eliminate' });
+                }
             });
         });
     }

@@ -33,20 +33,29 @@ class GamesController{
             message: 'Game saved'
         });
     }
-    public update(req: Request, res: Response){
-        res.json({
-            text: 'updating a game' + req.params.id
+    public async update(req: Request, res: Response):Promise<void>{
+        const {id} = req.params;
+        var gamequery="UPDATE games SET title=?,description=?,image=?"
+        var records = [req.body.title,req.body.description,req.body.image,id];
+        await pool.query(gamequery,records,(error:any, rows:any) =>{
+            if (error) {
+                res.status(500).json({ msg: 'error', details: error });
+                throw error;
+            }else{
+                res.status(200).json({text:'The game was update'});
+            }
         });
     }
     public async delete(req:Request, res: Response):Promise<void>{
-        const { id } = req.params.id;
+        const {id} = req.params;
         const gamequery = 'DELETE FROM games WHERE id = '+ id;
         await pool.query(gamequery, (error:any, rows:any) =>{
-            // if (Object.keys(rows).length < 1) {
-            //     res.status(404).json({text: 'The game does not existe'});
-            // } else {
+            if (error) {
+                res.status(500).json({ msg: 'error', details: error });
+                throw error;
+            }else{
                 res.status(200).json({text:'The game was eliminate'});
-            // }
+            }
         });
     }
 }

@@ -6,7 +6,11 @@ class IndexRputes{
         this.config();
     }
     config():void{
-        this.router.get('/',indexController.index);
+        this.router.get('/',indexController.list);
+        // this.router.get('/:id',indexController.getone);
+        // this.router.post('/',indexController.create);
+        // this.router.put('/:id',indexController.update);
+        // this.router.delete('/',indexController.delete);
     }
 }
 const indexRoutes=new IndexRputes();
