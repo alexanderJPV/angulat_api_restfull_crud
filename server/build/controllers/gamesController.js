@@ -54,7 +54,7 @@ class GamesController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            var gamequery = "UPDATE games SET title=?,description=?,image=?";
+            var gamequery = "UPDATE games SET title=?,description=?,image=? where id=?";
             var records = [req.body.title, req.body.description, req.body.image, id];
             yield database_1.default.query(gamequery, records, (error, rows) => {
                 if (error) {

@@ -35,8 +35,8 @@ class GamesController{
     }
     public async update(req: Request, res: Response):Promise<void>{
         const {id} = req.params;
-        var gamequery="UPDATE games SET title=?,description=?,image=?"
-        var records = [req.body.title,req.body.description,req.body.image,id];
+        var gamequery="UPDATE games SET title=?,description=?,image=? where id=?"
+        var records = [req.body.title, req.body.description, req.body.image, id];
         await pool.query(gamequery,records,(error:any, rows:any) =>{
             if (error) {
                 res.status(500).json({ msg: 'error', details: error });

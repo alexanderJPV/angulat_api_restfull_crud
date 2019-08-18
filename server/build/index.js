@@ -23,7 +23,7 @@ class Server {
     }
     routes() {
         this.app.use('/', indexRoutes_1.default);
-        this.app.use('/api/game', gamesRoutes_1.default);
+        this.app.use('/api/games', gamesRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

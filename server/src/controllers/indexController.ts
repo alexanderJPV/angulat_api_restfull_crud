@@ -7,13 +7,5 @@ class IndexController{
             text: 'API is /api/games'
         });
     }
-    public getone(req:Request, res:Response){
-    }
-    public create(){
-    }
-    public update(){
-    }
-    public delete(){
-    }
 }
 export const indexController = new IndexController();
